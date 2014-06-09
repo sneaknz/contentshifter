@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="ie6 lte9 lte8 lte7 lte6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="ie7 lte9 lte8 lte7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="ie8 lte9 lte8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="ie9 lte9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+	<title>Contentshifter plugin</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+	<link href="example/screen.css" rel="stylesheet" />
+	
+	<style type="text/css" media="screen">
+		/* Onmediaquery setup */
+		html { font-family: 'mobile'; }
+		html.lte8 { font-family: 'desktop' }
+
+		body { font-family: sans-serif; }
+		body:after { display: none; }
+
+		@media screen and (max-width: 450px) {
+			html { font-family: "mobile"; }
+			body:after { content: "mobile"; }
+		}
+
+		@media screen and (min-width: 768px) {
+			html { font-family: "tablet"; }
+			body:after { content: "tablet"; }
+		}
+
+		@media screen and (min-width: 960px) {
+			html { font-family: "desktop"; }
+			body:after { content: "desktop"; }
+		}
+	</style>
+
+	<script src="js/jquery-1.11.0.js"></script>
+	<script src="js/onmediaquery.js"></script>
+	<script src="js/jquery.contentshifter.js"></script>
+	
+	<script>
+		$(function(){
+			
+			var shifter = $('body').contentshifter();
+			
+			// Set up onmediaquery to handle changes on breakpoints
+			var queries = [{
+				context: 'mobile',
+				match: function() {
+					shifter.contentshifter("shift", "mobile");
+				},
+				unmatch: function() {
+					// shifter.contentshifter("shift", "mobile");
+				}
+			},
+			{
+				context: 'tablet',
+				match: function() {
+					shifter.contentshifter("shift", "tablet");
+				},
+				unmatch: function() {
+					// shifter.contentshifter("shift", "tablet");
+				}
+		    },
+			{
+				context: 'desktop',
+				match: function() {
+					shifter.contentshifter("shift", "desktop");
+				},
+				unmatch: function() {
+				
+				}
+			}];
+
+			MQ.init(queries);
+		});
+	</script>
+	
+</head>
+<body>
+	
+	<article>
+	
+		<h1>Contentshifter</h1>
+		<p class="intro">Shifting content around based on breakpoints specified as part of the <a href="">onmediaquery</a> plugin.</p>
+	
+		<section class="container main">
+			<h2>All the content goes in here by default.</h2>
+	
+			<section class="block">
+				<p>This block of content shouldn't move anywhere.</p>
+				<p class="update">Current: <span></span></p>
+			</section>
+	
+			<section class="block shift-content" data-alt-location="#mobile" data-breakpoint="mobile" data-shift='{"mobile": "#mobile"}'>
+				<p>This block needs to move into the <strong>mobile</strong> block on small screens.</p>
+				<p class="update">Current: <span></span></p>
+			</section>
+	
+			<section class="block shift-content" data-alt-location="#tablet" data-breakpoint="tablet" data-shift='{"tablet": "#tablet"}'>
+				<p>This block needs to move into the <strong>tablet</strong> block on small screens.</p>
+				<p class="update">Current: <span></span></p>
+			</section>
+	
+			<section class="block shift-content" data-shift='{"mobile": "#mobile", "tablet": "#tablet"}'>
+				<p>This block should move into both the <strong>tablet</strong> and <strong>mobile</strong> blocks on small screens.</p>
+				<p class="update">Current: <span></span></p>
+			</section>
+
+		</section>
+
+		<div id="mobile" class="container">
+			<h2>Mobile stuff will go in here.</h2>
+		</div>
+
+		<div id="tablet" class="container">
+			<h2>Tablet stuff will go in here.</h2>
+		</div>
+		
+	</article>
+		
+</body>
+</html>
