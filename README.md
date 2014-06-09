@@ -1,7 +1,10 @@
-# Fullpager plugin
+# Contentshifter plugin
 
-A plugin to create full-screen vertically paged content. <a href="http://code.sneak.co.nz/fullpager/">http://code.sneak.co.nz/fullpager/</a>.
+A plugin for specifying alternate locations for blocks of content within a page. Useful for moving content for mobile layouts.
 
+Documentation to come...
+
+<!--
 ## Usage
 
 After including jQuery, add the necessary required files for the plugin. This thing currently depends on a whole bunch of other plugins:
@@ -136,3 +139,4 @@ The second is on the page elements themselves, in the form of attributes:
 
 - Update to use debounced resize
 - Remove dependencies on other plugins
+-->
