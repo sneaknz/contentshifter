@@ -7,13 +7,13 @@
 	var Shifter = function(element, options) {
 		this.$el = $( element );
 		this.options = $.extend( true, {}, this.defaults, options );
-		this.$placeholder = $('<div class="' + this.options.contentClass + '" style="display:none;"></div>');
+		this.$placeholder = $('<div class="' + this.options.placeholderClass + '" style="display:none;"></div>');
 		this._init();
 	};
 	
 	Shifter.prototype = {
 		defaults: {
-			contentClass: 'shift-content',
+			placeholderClass: 'shift-placeholder',
 			containerClass: 'shift-destination'
 		},
 		
@@ -21,7 +21,7 @@
 			var me = this;
 			
 			me.blocks = [];
-			me.$blocks = me.$el.find('.' + me.options.contentClass);
+			me.$blocks = me.$el.find('[data-shift]');
 			
 			// Set up blocks of content for switching
 			me.$blocks.each(function(index) {
@@ -30,7 +30,6 @@
 				me.blocks.push({
 					$el: $(this),
 					$origin: $p,
-					id: me.options.contentClass + index,
 					locations: {},
 					current: "",
 					atOrigin: true
@@ -45,7 +44,7 @@
 						block.locations[i] = me.$el.find( block.shift[i] );
 					}
 				
-					block.$origin.attr('id', block.id).insertBefore( block.$el );
+					block.$origin.insertBefore( block.$el );
 				} else {
 					logError('You must add values in the data-shift attribute if you want elements shifted.');
 				}
@@ -84,8 +83,6 @@
 						block.atOrigin = true;
 					}
 				}
-			
-				block.$el.find('.update span').text(block.current);
 			}
 		},
 		
