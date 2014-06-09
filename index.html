@@ -52,34 +52,27 @@
 			// Set up onmediaquery to handle changes on breakpoints
 			var queries = [{
 				context: 'mobile',
-				match: function() {
-					shifter.contentshifter("shift", "mobile");
-				},
-				unmatch: function() {}
+				match: function() { shifter.contentshifter("shift", "mobile"); }
 			},
 			{
 				context: 'tablet',
-				match: function() {
-					shifter.contentshifter("shift", "tablet");
-				},
-				unmatch: function() {}
+				match: function() { shifter.contentshifter("shift", "tablet"); }
 		    },
 			{
 				context: 'desktop',
-				match: function() {
-					shifter.contentshifter("shift", "desktop");
-				},
-				unmatch: function() {}
+				match: function() { shifter.contentshifter("shift", "desktop"); }
 			},
 			{
 				context: 'widescreen',
-				match: function() {
-					shifter.contentshifter("shift", "widescreen");
-				},
-				unmatch: function() {}
+				match: function() { shifter.contentshifter("shift", "widescreen"); }
 			}];
 
 			MQ.init(queries);
+			
+			$('a.move').on('click', function(e) {
+				e.preventDefault();
+				shifter.contentshifter("shift", "move");
+			});
 		});
 	</script>
 	
@@ -103,6 +96,10 @@
 	
 			<section class="block" data-shift='{"mobile": "#mobile"}'>
 				<p>Shift to <strong>Mobile</strong></p>
+			</section>
+
+			<section class="block" data-shift='{"move": "#widescreen"}'>
+				<p><a href="#" class="move">Move me to <strong>Widescreen</strong></a></p>
 			</section>
 	
 			<section class="block" data-shift='{"tablet": "#tablet"}'>

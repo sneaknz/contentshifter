@@ -14,7 +14,8 @@
 	Shifter.prototype = {
 		defaults: {
 			placeholderClass: 'shift-placeholder',
-			containerClass: 'shift-destination'
+			containerClass: 'shift-destination',
+			autoreverse: false
 		},
 		
 		_init: function() {
@@ -77,7 +78,7 @@
 					}
 				} else {
 					// If the block has been moved, put it back
-					if ( !block.atOrigin ) {
+					if ( me.options.autoreverse && !block.atOrigin ) {
 						block.$el.insertAfter( block.$origin );
 						block.current = '';
 						block.atOrigin = true;

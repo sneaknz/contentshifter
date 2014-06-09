@@ -29,3 +29,13 @@ By default it will look for all elements that have a `data-shift` attribute and 
 	shifter.contentshifter("shift", "mobile");
 
 The first parameter is the function call, and the second is the key name for an alternate location. In this example, all elements that have a location for 'mobile' specified in the `data-shift` object will get shifted to their destination element, unless they are already there. Anything that doesn't match will be moved back to their original location.
+
+If you are using the plugin to move content based on screen sizes, you may want elements to automatically revert to their original locations the next time a shift is called (e.g. shifting on breakpoints). This function can be enabled by setting autoreverse to 'true':
+
+	var shifter = $('body').contentshifter({
+		autoreverse: true
+	});
+	
+## To-do
+
+- Add ability to set autoreverse setting on an individual element level
